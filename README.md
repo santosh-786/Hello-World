@@ -1,6 +1,6 @@
-# Simple DevOps Project 3
+# Docker Project
 
-![devops simple project)
+
 
 **Pre-Requirments**
 
@@ -30,7 +30,7 @@ vi Dockerfile
 # Pull base image
 From tomcat:8-jre8
 # Maintainer
-MAINTAINER "maheshkumar.root@gmail.com"
+MAINTAINER "xyz@gmail.com"
 
 # copy war file on to container
 COPY ./webapp.war /usr/local/tomcat/webapps
@@ -58,9 +58,9 @@ Test the connection by clicking `Test Connection` and save
 **Create Jenkins job**
 
 Jenkins Dashboard >> click `New item`
-- Enter item name: `Simple-Devops-Project-3`
+- Enter item name: `Docker-Project`
   - Source Code Management  
-    - Repository : `https://github.com/ValaxyTech/hello-world.git`
+    - Repository : `https://github.com/xyz/xyz.git`
     - Branches to build : `*/master`
   - Build
     - Root POM: `pom.xml`  
@@ -73,16 +73,13 @@ Jenkins Dashboard >> click `New item`
     - Remote directory	: `//opt//docker`  
   - Exec command[s]	:
   ~~~sh
-  docker stop mkn400_demo;
-  docker rm -f mkn400_demo;
-  docker image rm -f mkn400_demo_img;
   cd /opt/docker;
-  docker build -t mkn400_demo_img .
+  docker build -t docker_demo .
   ~~~
 
   - send files or execute commands over SSH  
     - Name: `docker_host`  
-    - Exec command	: `docker run -d --name mkn400_demo -p 8090:8080 mkn400_demo_img`  
+    - Exec command	: `docker run -d --name -p 8080:8080 docker_demo`  
 
 Login to Docker host and check images and containers before run the job. (no images and containers)
 
@@ -91,4 +88,4 @@ Run Jenkins job
 check images and containers again on Docker host. This time an image and container get creates through Jenkins job
 
 Access web application from browser which is running on container
-`http://<docker_host_Public_IP>:8090/webapp`
+`http://<docker_host_Public_IP>:8080/webapptest`
